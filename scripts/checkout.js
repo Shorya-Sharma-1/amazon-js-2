@@ -6,13 +6,20 @@ import { loadCart} from '../data/carts.js'
 //import '../data/cart-class.js'
 
 async function loadPage(){
-    await loadProductsFetch();
+    try{
+        //throw'error1'
+        
+        await loadProductsFetch();
 
-    await new Promise ((resolve)=>{
-        loadCart(()=>{
-           resolve();
+        const value = await new Promise ((resolve)=>{
+            loadCart(()=>{
+            resolve();
+            });
         });
-    });
+    } catch {
+        console.log('eror. Try again')
+    }
+    
     renderPaymentSummary();
     renderOrderSummary();
 }
